@@ -4,13 +4,71 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>HamroBachat</title>
+    <style>
+        *{
+            color: white;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            padding: 10px;
+            font-family: sans-serif;
+        }
+        .container div{
+            padding: 10px;
+            background: #828bf0;
+            margin: 10px 0;
+            border-radius: 7px;
+        }
+        h2{
+            color: black;
+        }
+        h3{
+            margin-bottom: 5px;
+        }
+    </style>
 </head>
 <body>
-    <div>
+    <div class="container">
+        <h2>Users API</h2>
         <div>
-            <h1>Register User</h1>
-            <p>api</p>
+            <h3>Register User</h3>
+            <p>type: POST</p>
+            <p>link: https://hamrobachat.herokuapp.com/api/v1/register</p>
+            <p>body: { "name": "example", "email": "example@example.com", "password": "password" }
+            </p>
+        </div>
+        <div>
+            <h3>Login User</h3>
+            <p>type: POST</p>
+            <p>link: https://hamrobachat.herokuapp.com/api/v1/login</p>
+            <p>body: { "email": "example@example.com", "password": "password" }
+            </p>
+        </div>
+        <div>
+            <h3>Logout User</h3>
+            <p>type: GET</p>
+            <p>link: https://hamrobachat.herokuapp.com/api/v1/logout</p>
+        </div>
+        <div>
+            <h3>Profile of Logged-In User</h3>
+            <p>type: GET</p>
+            <p>link: https://hamrobachat.herokuapp.com/api/v1/profile</p>
+        </div>
+        <h2>Bachat API</h2>
+        <div>
+            <h3>Create Monthly Bachat from current month</h3>
+            <p>type: GET</p>
+            <p>link: https://hamrobachat.herokuapp.com/api/v1/create</p>
+        </div>
+        <div>
+            <h3>Get monthly data</h3>
+            <p>type: GET</p>
+            <p>link: https://hamrobachat.herokuapp.com/api/v1/month/:month</p>
+            <p>description: :month is parameter. put date as 'MM YYYY' for data. Example: .../month/09 2022
+            </p>
         </div>
     </div>
 </body>
