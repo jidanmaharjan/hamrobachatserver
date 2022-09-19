@@ -7,7 +7,8 @@ const catchAsyncErrors = require('../middlewares/catchAsyncErrors')
 //create a new bachat
 exports.createBachat = catchAsyncErrors(async (req, res, next) => {
     const isCreated = await Bachat.find({date: moment().format('MM YYYY')})
-    if(!isCreated){
+    console.log(isCreated);
+    if(!isCreated.length>0){
       const bachat = await Bachat.create({
         date: moment().format('MM YYYY'),
         numOfCollections: 0,
