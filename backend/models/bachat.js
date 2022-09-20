@@ -23,6 +23,10 @@ const bachatSchema = new mongoose.Schema({
             type: String,
             required: true,
         },
+        amount:{
+            type: Number,
+            required: true
+        },
         fine: {
             type: Number,
             required: true,
@@ -31,6 +35,10 @@ const bachatSchema = new mongoose.Schema({
             type: Date,
             default: Date.now,
             required: true
+        },
+        status:{
+            type: String,
+            required: true,
         }  
     }]
 })
