@@ -42,6 +42,13 @@ exports.loginUser = catchAsyncErrors(async (req,res, next) => {
         return next (new ErrorHandler('Invalid Email or Password', 401));
     }
 
+    //Check if user is verified or not
+    const isVerified = await user.verified;
+
+    if(!isVerified) {
+        return next (new ErrorHandler('You are not verified user', 401));
+    }
+
     sendToken(user, 200, res)
 })
 

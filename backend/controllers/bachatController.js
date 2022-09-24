@@ -126,7 +126,7 @@ exports.getSubmitDetails = catchAsyncErrors(async (req, res, next) => {
     
 })
 
-//Get unverified users -ADMIN
+//Get unverified submission -ADMIN
 exports.getUnverifiedUsers = catchAsyncErrors(async (req, res, next) => {
     const bachat = await Bachat.find({date: moment().format('MM YYYY')})
     const unverified = []
@@ -163,3 +163,4 @@ exports.verifySubmission= catchAsyncErrors(async (req, res, next) => {
         res.json({ error: error })
     }
 })
+
