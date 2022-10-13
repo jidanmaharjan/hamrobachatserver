@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true}));
 app.use(cookieParser());
 app.use(
     cors({
-      origin: ['http://localhost:3000','https://bachatsathi.ml','https://bachatsathi.netlify.app/','https://hamrobachat.ml'],
+      origin: ['http://localhost:3000','https://bachatsathi.ml','https://bachatsathi.netlify.app','https://hamrobachat.ml'],
       credentials: true
     })
   )
