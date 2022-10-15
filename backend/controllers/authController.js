@@ -67,6 +67,20 @@ exports.getUserProfile = catchAsyncErrors(async(req, res, next) =>{
     })
 })
 
+//Get members => /api/v1/members
+exports.getMembers = catchAsyncErrors(async (req, res, next) => {
+    const users = await User.find({verified: true})
+    const members = []
+    users.forEach(user=>{
+        members.push({name: user.name,email: user.email})
+    })
+
+    res.status(200).json({
+        success: true,
+       members
+    })
+})
+
 // Update or change password => /api/v1/passsword/update
 exports.updatePassword = catchAsyncErrors(async(req, res, next) =>{
     const user = await User.findById(req.user.id).select('+password');
