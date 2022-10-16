@@ -11,7 +11,7 @@ const { isAuthenticatedUser, authorizeRoles } = require("../middlewares/auth");
 
 router.route("/month/:month").get(isAuthenticatedUser, getMonthData);
 router.route("/create").get(createBachat);
-router.route("/admin/allmonths").get(isAuthenticatedUser, authorizeRoles('admin') ,getAllMonths);
+router.route("/allmonths").get(isAuthenticatedUser,getAllMonths);
 router.route("/submitcurrentmonth").get(isAuthenticatedUser, submitRequest);
 router.route("/submitdetails").get(isAuthenticatedUser, getSubmitDetails);
 router.route("/getunverifiedusers").get(isAuthenticatedUser, authorizeRoles('admin'), getUnverifiedUsers);
