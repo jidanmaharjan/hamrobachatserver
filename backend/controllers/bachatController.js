@@ -7,6 +7,7 @@ const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 //create a new bachat
 exports.createBachat = catchAsyncErrors(async (req, res, next) => {
     const isCreated = await Bachat.find({date: moment().format('MM YYYY')})
+    const existed = isCreated[0]
     if(!isCreated.length>0){
       const bachat = await Bachat.create({
         date: moment().format('MM YYYY'),
@@ -16,13 +17,13 @@ exports.createBachat = catchAsyncErrors(async (req, res, next) => {
     })
     res.status(200).json({
         success: true,
-        bachat
+        bachat: bachat
     })  
     }
     else{
-        res.status(201).json({
-            success: false,
-            message: 'bachat already exists'
+        res.status(200).json({
+            success: true,
+            bachat: existed
         })
     }
     
@@ -80,7 +81,7 @@ exports.submitRequest = catchAsyncErrors(async (req, res, next) => {
         if(!isSubmitted){
             try {
             const file = await Bachat.findById(bachat[0]._id)
-            console.log(file);
+            // console.log(file);
             file.collected.push(collection)
             file.numOfCollections = file.collected.length
             await file.save({validateBeforeSave: false})

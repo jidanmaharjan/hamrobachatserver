@@ -28,10 +28,12 @@ app.get('/', (req, res)=>{
 //Import all routes
 const auth = require('./routes/auth');
 const bachat = require('./routes/bachat');
+const notification = require('./routes/notification');
 
 
 app.use('/api/v1', auth)
 app.use('/api/v1', bachat)
+app.use('/api/v1', notification)
 
 // Middleware to handle error messages
 app.use(errorMiddleware);
