@@ -1,4 +1,5 @@
 const  mongoose  = require("mongoose");
+const moment = require("moment");
 
 const notificationSchema = new mongoose.Schema({
     date: {
@@ -21,10 +22,6 @@ const notificationSchema = new mongoose.Schema({
         }
 
     }],
-    createdAt: {
-        type: Date,
-        default: Date.now()
-    },
     expireAt: {
         type: Date,
         default: Date.now()+30*24*60*60

@@ -6,7 +6,7 @@ const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 exports.newNotification = catchAsyncErrors(async (req, res, next) => {
     const { title, content } = req.body;
     const notification = await Notification.create({
-        date: moment().format('MMMM Do YYYY, h:mm a'),
+        date: moment().format(),
         title,
         content
     })
