@@ -17,3 +17,11 @@ exports.changeOverall= catchAsyncErrors(async (req, res, next) => {
         overall
     })
 })
+
+exports.getOverall=catchAsyncErrors(async (req, res) =>{
+    const overall = await Overall.findById('6352c13785ccf0f661ca19b9')
+    res.status(200).json({
+        success: true,
+        overall
+    })
+})
