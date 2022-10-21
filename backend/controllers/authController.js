@@ -72,7 +72,7 @@ exports.getMembers = catchAsyncErrors(async (req, res, next) => {
     const users = await User.find({verified: true})
     const members = []
     users.forEach(user=>{
-        members.push({name: user.name,email: user.email})
+        members.push({id:user._id, name: user.name,email: user.email})
     })
 
     res.status(200).json({
