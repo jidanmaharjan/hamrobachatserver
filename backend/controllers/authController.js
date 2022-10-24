@@ -188,6 +188,19 @@ exports.updateUser = catchAsyncErrors(async(req, res, next) =>{
     })
 })
 
+//Verify a new user
+exports.acceptUser = catchAsyncErrors(async (req, res, next) => {
+    const user = await User.findById(req.params.id)
+    if(!user){
+        return next(new ErrorHandler(`User not found with id ${req.params.id}`))
+    }
+    user.verified = true
+    await user.save()
+    res.status(200).json({
+        success: true,
+    })
+})
+
 //Delete user profile => /api/v1/admin/user/:id
 exports.deleteUser = catchAsyncErrors(async(req, res, next) =>{
     const user = await User.findById(req.params.id);
