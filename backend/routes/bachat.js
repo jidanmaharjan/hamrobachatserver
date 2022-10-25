@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const {
-    getMonthData, createBachat, getAllMonths, submitRequest, getSubmitDetails, getUnverifiedUsers, verifySubmission,
+    getMonthData, createBachat, getAllMonths, submitRequest, getSubmitDetails, getUnverifiedUsers, verifySubmission, unverifySubmission, verifyUnsubmitted,
 } = require("../controllers/bachatController")
 
 
@@ -15,6 +15,8 @@ router.route("/allmonths").get(isAuthenticatedUser,getAllMonths);
 router.route("/submitcurrentmonth").get(isAuthenticatedUser, submitRequest);
 router.route("/submitdetails").get(isAuthenticatedUser, getSubmitDetails);
 router.route("/getunverifiedusers").get(isAuthenticatedUser, authorizeRoles('admin'), getUnverifiedUsers);
+router.route("/verifyunsubmitted").post(isAuthenticatedUser,authorizeRoles('admin'), verifyUnsubmitted);
 router.route("/verifysubmission").get(isAuthenticatedUser, authorizeRoles('admin'), verifySubmission);
+router.route('/unverifysubmission/:bachatid/:collectid').put(isAuthenticatedUser, authorizeRoles('admin'), unverifySubmission)
 
 module.exports = router;

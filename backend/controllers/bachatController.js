@@ -165,4 +165,53 @@ exports.verifySubmission= catchAsyncErrors(async (req, res, next) => {
     }
 })
 
-//Verify unsubmitted
+//Verify Unsubmitted
+exports.verifyUnsubmitted= catchAsyncErrors(async (req, res, next) => {
+    const bachat = await Bachat.find({date: moment().format('MM YYYY')})
+    
+    // const isSubmitted = bachat[0].collected.length>0 ? bachat[0].collected.find({_id: req.user.id}).length>0 : false
+    const isSubmitted = bachat[0].collected.find(b=>b.user.toString() === req.body.id.toString())
+    const prevBachat = await Bachat.find({date: moment().subtract(1, "month").format('MM YYYY')})
+    // const fined = prevBachat[0].collected.length>0 ? prevBachat[0].collected.find({_id: req.user.id}) : []
+    const fined = prevBachat[0].collected.find(b=>b.user.toString() === req.body.id.toString())
+    const collection = {
+        user: req.body.id,
+        name: req.body.name,
+        amount: Number((fined ? bachat[0].primaryAmount : bachat[0].primaryAmount*2)),
+        fine: Number((fined ? 0 : 100)),
+        status: 'Verified'
+    }
+    
+    
+        if(!isSubmitted){
+            try {
+            const file = await Bachat.findById(bachat[0]._id)
+            // console.log(file);
+            file.collected.push(collection)
+            file.numOfCollections = file.collected.length
+            await file.save({validateBeforeSave: false})
+            res.status(200).json({
+                success: true,
+            })
+        } catch (error) {
+        res.status(400).json(error)
+        }
+        }
+        else{
+            res.status(201).json({
+                success: false,
+                message: 'Already submitted this month'
+            })
+        }
+})
+
+//Unverify submitted
+exports.unverifySubmission = catchAsyncErrors(async (req, res, next)=>{
+    const bachat = await Bachat.findById(req.params.bachatid)
+    bachat.collected.pull({_id :req.params.collectid} )
+    await bachat.save()
+    res.status(200).json({
+        success: true,
+        message: 'Submission deleted successfully'
+    })
+})
