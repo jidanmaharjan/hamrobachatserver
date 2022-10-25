@@ -1,5 +1,6 @@
 const Bachat = require('../models/bachat')
 const moment = require('moment');
+const User = require('../models/user')
 
 const ErrorHandler =  require('../utils/errorHandler')
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
@@ -213,5 +214,28 @@ exports.unverifySubmission = catchAsyncErrors(async (req, res, next)=>{
     res.status(200).json({
         success: true,
         message: 'Submission deleted successfully'
+    })
+})
+
+//Fill all collection for a month
+exports.fillAll = catchAsyncErrors(async (req, res, next) => {
+    const bachat = await Bachat.findById(req.query.id)
+    const users = await User.find({verified: true})
+    users.forEach(user=>{
+        bachat.collected.push({
+            
+                user: user._id,
+                name: user.name,
+                amount: 300,
+                fine: 0,
+                status: 'Verified'
+            
+        })
+    })
+    bachat.numOfCollections = users.length
+    await bachat.save()
+    res.status(200).json({
+        success: true,
+        message: 'All users set submitted successfully'
     })
 })
