@@ -17,6 +17,6 @@ router.route("/submitdetails").get(isAuthenticatedUser, getSubmitDetails);
 router.route("/getunverifiedusers").get(isAuthenticatedUser, authorizeRoles('admin'), getUnverifiedUsers);
 router.route("/verifyunsubmitted").post(isAuthenticatedUser,authorizeRoles('admin'), verifyUnsubmitted);
 router.route("/verifysubmission").get(isAuthenticatedUser, authorizeRoles('admin'), verifySubmission);
-router.route('/unverifysubmission/:bachatid/:collectid').put(isAuthenticatedUser, authorizeRoles('admin'), unverifySubmission)
+router.route("/unverifysubmission/:bachatid/:collectid").get(isAuthenticatedUser, authorizeRoles('admin'), unverifySubmission)
 
 module.exports = router;
