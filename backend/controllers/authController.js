@@ -14,7 +14,10 @@ exports.registerUser = catchAsyncErrors ( async (req, res, next) => {
         name,
         email,
         password,
-        
+        avatar: {
+            public_id: 'avatars/l1tsgy2eiditogxzi9vb',
+            url: 'https://res.cloudinary.com/meroshop/image/upload/v1659042696/avatars/l1tsgy2eiditogxzi9vb.png'
+        }
     })
     
     res.status(200).json({
